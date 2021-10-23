@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bf443a386e9942ab8d20690aa97499a0 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_bf443a386e9942ab8d20690aa97499a0" ></div>
+        
+</body>
+<script>    
+    
+            var map_bf443a386e9942ab8d20690aa97499a0 = L.map(
+                "map_bf443a386e9942ab8d20690aa97499a0",
+                {
+                    center: [41.97969558739158, 2.8213967358161915],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 15,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2f73ad2b35694bb5a210731d5bcd027d = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_bf443a386e9942ab8d20690aa97499a0);
+        
+    
+            var marker_cluster_1d83fd6658204e4bb3bd35a562ab362c = L.markerClusterGroup(
+                {}
+            );
+            map_bf443a386e9942ab8d20690aa97499a0.addLayer(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            var circle_marker_820cbcffef2346edbf1d19d0dbea94c8 = L.circleMarker(
+                [41.984237555271356, 2.824810398213203],
+                {"bubblingMouseEvents": true, "color": "#CC0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CC0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_820cbcffef2346edbf1d19d0dbea94c8.bindTooltip(
+                `<div>
+                     
+    Name : <b>La Pedra</b><br>
+    Beer type : <b>Estrella</b><br>
+    Price : <b>2.50  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_929ac21013744f1684bce5b861e849fb = L.circleMarker(
+                [41.9827447842272, 2.824597555884473],
+                {"bubblingMouseEvents": true, "color": "#CC0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CC0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_929ac21013744f1684bce5b861e849fb.bindTooltip(
+                `<div>
+                     
+    Name : <b>La Malabarista</b><br>
+    Beer type : <b>Estrella</b><br>
+    Price : <b>2.50  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_1b12605bdda44cd78b792e72797de69d = L.circleMarker(
+                [41.986972073636394, 2.824348242391503],
+                {"bubblingMouseEvents": true, "color": "#CC0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CC0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_1b12605bdda44cd78b792e72797de69d.bindTooltip(
+                `<div>
+                     
+    Name : <b>Sant Felix</b><br>
+    Beer type : <b>Estrella</b><br>
+    Price : <b>2.50  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ca72835840304ac68b715228935baa59 = L.circleMarker(
+                [41.98208488726082, 2.8227794712270655],
+                {"bubblingMouseEvents": true, "color": "#FF8000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF8000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_ca72835840304ac68b715228935baa59.bindTooltip(
+                `<div>
+                     
+    Name : <b>Porcus Girona</b><br>
+    Beer type : <b>San Miguel</b><br>
+    Price : <b>2.00  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_dec99f356e2340fe8eada1e1241cee27 = L.circleMarker(
+                [41.98503720340857, 2.8251891847201898],
+                {"bubblingMouseEvents": true, "color": "#FF8000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF8000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_dec99f356e2340fe8eada1e1241cee27.bindTooltip(
+                `<div>
+                     
+    Name : <b>Zanpanzar</b><br>
+    Beer type : <b>Estrella</b><br>
+    Price : <b>2.40  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_daac099177ff410fbc63c597d026c6dd = L.circleMarker(
+                [41.989758166656024, 2.82524114054202],
+                {"bubblingMouseEvents": true, "color": "#4C9900", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4C9900", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_daac099177ff410fbc63c597d026c6dd.bindTooltip(
+                `<div>
+                     
+    Name : <b>Casal Independentista El Forn</b><br>
+    Beer type : <b>Estrella</b><br>
+    Price : <b>1.80  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_5e750387b18049a4a96bd710c90a30fc = L.circleMarker(
+                [41.982915034280865, 2.8246796270488135],
+                {"bubblingMouseEvents": true, "color": "#CC0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CC0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_5e750387b18049a4a96bd710c90a30fc.bindTooltip(
+                `<div>
+                     
+    Name : <b>El Cercle</b><br>
+    Beer type : <b>Estrella</b><br>
+    Price : <b>2.50  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ba6f68a66553410ea174f75c6b061c93 = L.circleMarker(
+                [41.98565667652312, 2.8166308425304756],
+                {"bubblingMouseEvents": true, "color": "#FF8000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF8000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_1d83fd6658204e4bb3bd35a562ab362c);
+        
+    
+            circle_marker_ba6f68a66553410ea174f75c6b061c93.bindTooltip(
+                `<div>
+                     
+    Name : <b>Dúplex Girona</b><br>
+    Beer type : <b>Estrella</b><br>
+    Price : <b>2.00  </b><br>
+    
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
