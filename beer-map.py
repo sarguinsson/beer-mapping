@@ -4,113 +4,55 @@ import pandas as pd
 import pymongo
 import geopandas as gpd
 from shapely.geometry import Point, shape
+from pyproj import Proj, Transformer
+import helpers
+# from helpers import locate_points_inside_polygon, get_neighborhoods_location, coordinates_to_point
+
 from folium import plugins
 
 # endregion
 
-
 # region Setup
+
+desired_width = 600
+pd.set_option('display.width', desired_width)
+pd.set_option('display.max_columns', 30)
+pd.set_option('display.max_rows', 400)
 
 client = pymongo.MongoClient("mongodb+srv://admin:admin@beermap.yrkxp.mongodb.net/beer_map_db?retryWrites=true&w=majority")
 db = client.beer_map_db
+input_nbh_shp = "./raw_data/barris/Barris.shp"
+input_pc_shp = "./raw_data/codis_postals/Codis_postals.shp"
+input_activities = "./raw_data/activitats/activitats2020_bars.csv"
+
+
+nbh_sbh_df = gpd.read_file(input_nbh_shp)
+act_df = gpd.read_file(input_activities)
+pc_df = gpd.read_file(input_pc_shp)
+
+pc_df = pc_df.to_crs(epsg=4236)
+nbh_sbh_df = nbh_sbh_df.to_crs(epsg=4236)
+
 color = ""
 center = [41.97969558739158, 2.8213967358161915]
 bars = list(db.bars.find({}, {'_id': 0}))
-neighborhoods = list(db.barris.find({}, {'_id': 0, 'type': 0}))
-
-
-input_barris_shapes = "./raw_data/barris/Barris.shp"
-nbh_sbh_df = gpd.read_file(input_barris_shapes)
-# nbh_sbh_df = nbh_sbh_df[['BARRIS', 'geometry']]
-# geoPath  = neighborhoods_shapes.geometry.to_json()
-# poligons = folium.features.GeoJson(geoPath)
-# map_girona.add_child(poligons)
-# endregion
-
-# region Helpers
-
-def get_marker_color(price):
-    price = float(price)
-    if price <= 1.80:
-        return "green"
-    if price >= 2.20:
-        return "red"
-    return "beige"
-
-
-def get_neighborhoods_location(nbh_df, bars):
-    for i, r in nbh_df.iterrows():
-        polygon = r['geometry']
-        print(r['NOM_COMPLE'])
-        print(polygon)
-        for bar in bars:
-            bar_location_point = Point(bar['coordinates']['longitude'],bar['coordinates']['latitude'])
-            is_bar_in_the_nbh = bar_location_point.within(polygon)
-            if(is_bar_in_the_nbh):
-                print(bar['name'] + ' està al  ' + r['NOM_COMPLE'])
-
+# transformer = Transformer.from_crs("epsg:4326", "epsg:25831")
 
 # endregion
 
-get_neighborhoods_location(nbh_sbh_df, bars)
+# bars_df = helpers.coordinates_to_point_activities(act_df)
+bars_df = helpers.coordinates_to_point(bars)
+# nbh_bars_dict = helpers.get_neighborhoods_location(nbh_sbh_df, bars_df)
+# pc_bars_dict = helpers.get_postal_code_location(pc_df, bars_df)
 
-# Create a map
-# bar object to df
-latitutdes = []
-longitudes= []
-for bar in bars:
-    latitutdes.append(bar['coordinates']['latitude'])
-    longitudes.append(bar['coordinates']['longitude'])
-df = pd.DataFrame({
-    'latitude': latitutdes,
-    'longitude': longitudes
-})
-
-
-locs_geometry = [Point(xy) for xy in zip(df.longitude,df.latitude)]
-crs = {'init': 'epsg:25831'}
-# Coordinate Reference Systems, "epsg:4326" is a common projection of WGS84 Latitude/Longitude
-locs_gdf = gpd.GeoDataFrame(bars, crs=crs, geometry=locs_geometry)
-map_girona = folium.Map(location=center, zoom_start=15, tiles='cartodbpositron')
-
-# feature_cheap = folium.FeatureGroup(name='Cheap')
-# feature_normal = folium.FeatureGroup(name='Normal')
-# feature_expensive = folium.FeatureGroup(name='Expensive')
-
-marker_cluster = plugins.MarkerCluster().add_to(map_girona)
-for i, v in locs_gdf.iterrows():
-    popup = """
-    Name : <b>%s</b><br>
-    Beer type : <b>%s</b><br>
-    Price : <b>%.2f  </b><br>
-    """ % (v['name'], v.canya['type'], v.canya['price'])
-
-    if v.canya['price'] <= 1.80:
-        folium.CircleMarker(location=[v.coordinates['latitude'], v.coordinates['longitude']],
-                            radius=10,
-                            tooltip=popup,
-                            color='#4C9900',
-                            fill_color='#4C9900',
-                            fill=True).add_to(marker_cluster)
-    elif v.canya['price'] >= 2.50:
-        folium.CircleMarker(location=[v.coordinates['latitude'], v.coordinates['longitude']],
-                            radius=10,
-                            tooltip=popup,
-                            color='#CC0000',
-                            fill_color='#CC0000',
-                            fill=True).add_to(marker_cluster)
-    else :
-        folium.CircleMarker(location=[v.coordinates['latitude'], v.coordinates['longitude']],
-                            radius=10,
-                            tooltip=popup,
-                            color='#FF8000',
-                            fill_color='#FF8000',
-                            fill=True).add_to(marker_cluster)
-
-# feature_cheap.add_to(map_girona)
-# feature_normal.add_to(map_girona)
-# feature_expensive.add_to(map_girona)
-# folium.LayerControl(collapsed=False).add_to(map_girona)
-
-# Display the map and save map to html file
+# # Create a map
+map_girona = folium.Map(location=center, zoom_start=13, tiles='Stamen Toner')
+#
+helpers.add_bar_circlemarker_to_map(map_girona,bars_df) #Show bars with circlemarkers
+# helpers.add_points_to_map(map_girona, bars_df)
+# helpers.add_nbh_shapes_to_map(nbh_sbh_df, map_girona, nbh_bars_dict) #Show neighbourhoods shapes
+# helpers.add_pc_shapes_to_map(map_girona, pc_df, pc_bars_dict) #Show postal code shapes
+# helpers.add_heatmap(map_girona,bars_df)
+#
+# # Display the map and save map to html file
 map_girona.save('index.html')
